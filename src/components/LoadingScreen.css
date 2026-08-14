@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #1d5fd6 0%, #6fa8e8 55%, #cfe4f7 100%);
+  overflow: hidden;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  opacity: 1;
+  visibility: visible;
+}
+.loading-screen.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.loading-sun {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  margin-left: -70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,246,224,0.95) 0%, rgba(255,246,224,0.35) 45%, transparent 70%);
+  filter: blur(2px);
+  animation: sun-pulse 4s ease-in-out infinite;
+}
+@keyframes sun-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.85; }
+}
+
+.loading-cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 100px;
+  filter: blur(1px);
+  opacity: 0.9;
+}
+.loading-cloud::before, .loading-cloud::after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+.c1 { width: 180px; height: 60px; top: 10%; left: -220px; animation: drift 18s linear infinite; }
+.c1::before { width: 80px; height: 80px; top: -40px; left: 20px; }
+.c1::after { width: 60px; height: 60px; top: -28px; left: 100px; }
+
+.c2 { width: 140px; height: 46px; top: 18%; left: -180px; animation: drift 24s linear infinite; animation-delay: -6s; }
+.c2::before { width: 60px; height: 60px; top: -30px; left: 15px; }
+.c2::after { width: 46px; height: 46px; top: -20px; left: 76px; }
+
+.c3 { width: 200px; height: 66px; top: 76%; left: -240px; animation: drift 30s linear infinite; animation-delay: -14s; opacity: 0.7; }
+.c3::before { width: 90px; height: 90px; top: -46px; left: 25px; }
+.c3::after { width: 66px; height: 66px; top: -30px; left: 110px; }
+
+.c4 { width: 120px; height: 40px; top: 86%; left: -160px; animation: drift 21s linear infinite; animation-delay: -3s; opacity: 0.6; }
+.c4::before { width: 52px; height: 52px; top: -26px; left: 12px; }
+.c4::after { width: 40px; height: 40px; top: -18px; left: 66px; }
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 260px)); }
+}
+
+.loading-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 48px 56px;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at center, rgba(29,95,214,0.18) 0%, rgba(29,95,214,0.06) 60%, transparent 100%);
+}
+
+.loading-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  letter-spacing: -0.01em;
+}
+.loading-mark-icon { font-size: 24px; }
+
+.loading-ring-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.loading-ring { width: 120px; height: 120px; transform: rotate(-90deg); }
+.loading-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.3);
+  stroke-width: 6;
+}
+.loading-ring-fill {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 327;
+  transition: stroke-dashoffset 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
+}
+.loading-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.loading-stage {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.92);
+  min-height: 20px;
+}
+
+.loading-steps {
+  display: flex;
+  gap: 8px;
+}
+.loading-step {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.loading-step.is-done {
+  background: #ffffff;
+  transform: scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-sun, .loading-cloud { animation: none; }
+}
